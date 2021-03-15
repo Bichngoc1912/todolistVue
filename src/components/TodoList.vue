@@ -25,7 +25,7 @@
                             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
                         </section>
                         <section v-else-if="data=null">
-                            
+
                         </section>
                         <section v-else>
                             <div v-if="loading">
@@ -36,7 +36,7 @@
                                     <p>{{strTitle.strTitle}} </p>
                                 </div>
                                 <div class="btn-item" id="haha">
-                                    <input type="button" id="" value="Delete" onclick="deleteItem()" class="btn-item--del"/> 
+                                    <input type="button" :id="strTitle.intId" value="Delete" onclick="deleteItem()" class="btn-item--del"/> 
                                     <input type="button" id=""  onclick="changeStatus(this.id)" value="Done" class="btn-item--done "/>
                                 </div>
                             </div>
