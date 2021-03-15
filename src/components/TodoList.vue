@@ -21,15 +21,27 @@
                         <button  class="btn-submit" type="button" onclick="addItem1()" >+Add</button>
                     </form>
                     <div class="list-item" id="item">
-                        <div id="" v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
-                            <div class="item-content">
-                                <p>{{strTitle.strTitle}} </p>
+                        <section v-if="errored">
+                            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                        </section>
+                        <section v-else-if="data=null">
+                            
+                        </section>
+                        <section v-else>
+                            <div v-if="loading">
+                                <p>Loading.....</p>
                             </div>
-                            <div class="btn-item" id="haha">
-                                <input type="button" id="" value="Delete" onclick="deleteItem()" class="btn-item--del"/> 
-                                <input type="button" id="'+ arr[i].flagStatus+'"  onclick="changeStatus(this.id)" value="Done" class="btn-item--done "/>
+                            <div id="" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
+                                <div class="item-content">
+                                    <p>{{strTitle.strTitle}} </p>
+                                </div>
+                                <div class="btn-item" id="haha">
+                                    <input type="button" id="" value="Delete" onclick="deleteItem()" class="btn-item--del"/> 
+                                    <input type="button" id=""  onclick="changeStatus(this.id)" value="Done" class="btn-item--done "/>
+                                </div>
                             </div>
-                        </div>
+                        </section>
+                       
                     </div>
                 </div>
                 </div>
@@ -45,15 +57,22 @@ import axios from 'axios';
 export default{
     data () {
     return {
-      listItem: []
+      listItem: [],
+      errored : false,
+      loading: true
     }
   },
   mounted () {
     axios.get('http://localhost:8082/Api/indexApi.php')
-      .then((response)=>{
+        .then((response)=>{
           this.listItem = response.data
           console.log(this.listItem)
       })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+          })
+        .finally(()=>this.loading = false)
   }
  }
 </script>
