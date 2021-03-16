@@ -1,14 +1,12 @@
 <template>
     <div >
         <div class="container-fuild">
-            <div id="Title">
-                <h1>To do list</h1>
-            </div>
+            
             <div class="container">
                 <div class="nav">
                     <div class="nav-box">
                         <div class="nav-box--title"><span>Danh mục </span> </div>
-                        <div class="content">All</div>
+                        <div class="nav-content">All</div>
                     </div>
                     <div class="nav-box">
                         <div class="nav-box--title">Bài báo </div>
@@ -16,22 +14,23 @@
                 </div>
                 <div class="content">
                     <form method="POST" class="input-txt" id="formSubmit" >
-                        <input required id="addItem" v-model="strTitle"  type="text" placeholder="Add Item">
-                        <button  class="btn-submit" type="button" v-on:click="formSubmit()">+Add</button>
+                        <input id="addItem" v-model="strTitle"  type="text" placeholder="Thêm công việc">
+                        <button class="btn-submit" type="button" v-on:click="formSubmit()">Add</button>
                     </form>
                     <div id="error" :style="{display:displayInput}">
                        Trường này không được để trống!
                     </div>
                     <div class="list-item" id="item">
+                         <!-- we're not able to retrieve -->
                         <section v-if="errored">
-                            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+                            <p>Rất tiếc, chúng tôi không thể truy xuất thông tin vào lúc này, vui lòng thử lại sau.</p>
                         </section>
                         <section v-else-if="data = null">
                             <p>You haven't data.</p>
                         </section>
                         <section v-else>
                             <div v-if="loading">
-                                <p>Loading.....</p>
+                                <p class="loader"></p>
                             </div>
                             <div :id="strTitle.intId" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
                                 <div class="item-content">

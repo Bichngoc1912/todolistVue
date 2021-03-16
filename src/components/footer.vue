@@ -1,10 +1,8 @@
 <template>
     <div>
         <footer>
-            <div>
-                <span>To do list make by : Nguyen Thi Bich Ngoc</span> <br>
-                <span>&copy; Copyright 2021</span>
-            </div>
+                <p>To do list make by : Nguyen Thi Bich Ngoc <br>
+                &copy; Copyright 2021</p>
         </footer>
     </div>
 </template>
