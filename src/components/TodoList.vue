@@ -1,4 +1,3 @@
-
 <template>
     <div >
         <div class="container-fuild">
@@ -17,27 +16,35 @@
                 </div>
                 <div class="content">
                     <form method="POST" class="input-txt" id="formSubmit" >
-                        <input id="addItem" type="text" placeholder="Add Item">
-                        <button  class="btn-submit" type="button" onclick="addItem1()" >+Add</button>
+                        <input required id="addItem" v-model="strTitle"  type="text" placeholder="Add Item">
+                        <button  class="btn-submit" type="button" v-on:click="formSubmit()">+Add</button>
                     </form>
+                    <div id="error" :style="{display:displayInput}">
+                       Trường này không được để trống!
+                    </div>
                     <div class="list-item" id="item">
                         <section v-if="errored">
                             <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
                         </section>
-                        <section v-else-if="data=null">
-
+                        <section v-else-if="data = null">
+                            <p>You haven't data.</p>
                         </section>
                         <section v-else>
                             <div v-if="loading">
                                 <p>Loading.....</p>
                             </div>
-                            <div id="" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
+                            <div :id="strTitle.intId" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
                                 <div class="item-content">
                                     <p>{{strTitle.strTitle}} </p>
                                 </div>
-                                <div class="btn-item" id="haha">
-                                    <input type="button" :id="strTitle.intId" value="Delete" onclick="deleteItem()" class="btn-item--del"/> 
-                                    <input type="button" id=""  onclick="changeStatus(this.id)" value="Done" class="btn-item--done "/>
+                                <div class="btn-item" >
+                                    <input type="button" value="Delete" v-on:click="deleteItem()" class="btn-item--del"/> 
+                                    <section v-if="strTitle.flagStatus == true">
+                                        <input type="button" v-on:click="changeStatus()" value="unDone" class="btn-item--done "/>
+                                    </section>
+                                    <section v-else>
+                                        <input type="button" v-on:click="changeStatus()" id="" value="Done" class="btn-item--done "/>
+                                    </section>
                                 </div>
                             </div>
                         </section>
@@ -55,15 +62,20 @@
 <script>
 import axios from 'axios';
 export default{
+   
     data () {
+        
     return {
-      listItem: [],
-      errored : false,
-      loading: true
+        listItem: [],
+        errored : false,
+        loading: true,
+        strTitle: '',
+        postErr: [],
+        displayInput: "none"
     }
   },
   mounted () {
-    axios.get('http://localhost:8082/Api/indexApi.php')
+    axios.get(`http://localhost:8082/Api/indexApi.php`)
         .then((response)=>{
           this.listItem = response.data
           console.log(this.listItem)
@@ -73,8 +85,65 @@ export default{
           this.errored = true
           })
         .finally(()=>this.loading = false)
+  },
+  methods:{
+      formSubmit() {
+          if(this.strTitle !== ''){
+             var formData = new FormData();
+            formData.append('strTitle',this.strTitle)
+            axios.post('http://localhost:8082/Api/postApi.php',formData,
+            {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+            .then(function (response) {
+                console.log(response);
+                location.reload();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+          }
+            this.displayInput = "block"
+        },
+    deleteItem(){
+        var conf = confirm('Bạn chắc chắn muốn xóa item này?');
+        if(conf=== true){
+            var itemDel = event.target.parentElement.parentElement.id;
+            var formData = new FormData();
+            formData.append('intId',itemDel)
+            axios.post('http://localhost:8082/Api/deleteApi.php',formData,
+            {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+            .then(function (response) {
+                console.log(response);
+                location.reload();
+            })
+            .catch(function (error) {
+                console.log(error);
+                });
+        }
+    },
+    changeStatus(){
+        var itemChange = event.target.parentElement.parentElement.parentElement.id;
+        console.log(itemChange);
+        var formData = new FormData();
+            formData.append('intId',itemChange)
+            axios.post('http://localhost:8082/Api/changeStatusApi.php',formData,
+            {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            })
+            .then(function (response) {
+                console.log(response);
+                location.reload();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    },
+
   }
- }
+}
 </script>
 
 
