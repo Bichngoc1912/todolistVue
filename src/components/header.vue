@@ -1,19 +1,19 @@
 <template>
     <div>
-            <header>
+        <header>
                 
         </header>
-        <div  class="flex-menu">
-            <div v-for="item in menuItem" :key="item.name"  class="menu-item">
+        <div  class="menu">
+            <div v-for="item in menuItem" :key="item.name"  class="menu__item">
                 <p>
-                    <a href="#"  class="menu-item--link">{{ item.item }}</a> 
+                    <a href="#"  class="menu__item--link">{{ item.item }}</a> 
                 </p>
             </div>
         </div>
     </div>
 </template>
-<style>
-@import '../assets/css/index.css';
+<style >
+@import '../assets/css/style.css';
 </style>
 <script type="text/javascript">
   export default {

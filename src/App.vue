@@ -1,15 +1,19 @@
 <template>
+
   <div id="app">
     <div>
-      <headerMenu />
-      <todolist />
-      <footerTodo />
+      <section>
+        <headerMenu />
+      </section>
+      <section class="container-fuild">
+        <todolist />
+      </section>
+      <section>
+        <footerTodo />
+      </section>
     </div>
-
-   
   </div>
 </template>
-
 <script>
 import todolist from './components/TodoList.vue'
 import headerMenu from './components/header.vue'

@@ -1,61 +1,55 @@
 <template>
-    <div >
-        <div class="container-fuild">
-            
             <div class="container">
-                <div class="nav">
-                    <div class="nav-box">
-                        <div class="nav-box--title"><span>Danh mục </span> </div>
-                        <div class="nav-content">All</div>
+                <col-left class="nav">
+                    <div class="nav__box">
+                        <div class="nav__box--title"><span>Danh mục </span> </div>
+                        <div class="nav__content">All</div>
                     </div>
-                    <div class="nav-box">
-                        <div class="nav-box--title">Bài báo </div>
+                    <div class="nav__box">
+                        <div class="nav__box--title">Bài báo </div>
                     </div>
-                </div>
-                <div class="content">
-                    <form method="POST" class="input-txt" id="formSubmit" >
+                </col-left>
+                <col-right class="content">
+                    <form method="POST" class="formInput" id="formSubmit" >
                         <input id="addItem" v-model="strTitle"  type="text" placeholder="Thêm công việc">
-                        <button class="btn-submit" type="button" v-on:click="formSubmit()">Add</button>
+                        <button class="formInput__btn--add" type="button" v-on:click="formSubmit()">Add</button>
                     </form>
                     <div id="error" :style="{display:displayInput}">
                        Trường này không được để trống!
                     </div>
-                    <div class="list-item" id="item">
-                         <!-- we're not able to retrieve -->
-                        <section v-if="errored">
+                    <div class="listItem" id="item">
+                        <div v-if="errored">
                             <p>Rất tiếc, chúng tôi không thể truy xuất thông tin vào lúc này, vui lòng thử lại sau.</p>
-                        </section>
-                        <section v-else-if="data = null">
+                        </div>
+                        <div v-else-if="data = null">
                             <p>You haven't data.</p>
-                        </section>
-                        <section v-else>
+                        </div>
+                        <div v-else>
                             <div v-if="loading">
                                 <p class="loader"></p>
                             </div>
-                            <div :id="strTitle.intId" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "list-item--01"> 
-                                <div class="item-content">
+                            <div :id="strTitle.intId" v-else v-for="strTitle in listItem.data" :key="strTitle.strTitle"  class = "listItem__01"> 
+                                <div class="listItem__01--content">
                                     <p>{{strTitle.strTitle}} </p>
                                 </div>
-                                <div class="btn-item" >
-                                    <input type="button" value="Delete" v-on:click="deleteItem()" class="btn-item--del"/> 
-                                    <section v-if="strTitle.flagStatus == true">
-                                        <input type="button" v-on:click="changeStatus()" value="unDone" class="btn-item--done unDone"/>
-                                    </section>
-                                    <section v-else>
-                                        <input type="button" v-on:click="changeStatus()" id="" value="Done" class="btn-item--done done"/>
-                                    </section>
+                                <div class="listItem__01--btn" >
+                                    <input type="button" value="Delete" v-on:click="deleteItem()" class="listItem__01--btnDel"/> 
+                                    <div v-if="strTitle.flagStatus == true">
+                                        <input type="button" v-on:click="changeStatus()" value="unDone" class="listItem__01--btnDone unDone"/>
+                                    </div>
+                                    <div v-else>
+                                        <input type="button" v-on:click="changeStatus()" id="" value="Done" class="listItem__01--btnDone done"/>
+                                    </div>
                                 </div>
                             </div>
-                        </section>
+                        </div>
                        
                     </div>
-                </div>
-                </div>
+                </col-right>
             </div>
-        </div>
 </template>
-<style>
-@import '../assets/css/index.css';
+<style >
+@import '../assets/css/style.css';
 </style>
 
 <script>
