@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <headerMenu />
-    <todolist />
-    <footerTodo />
+    <div>
+      <headerMenu />
+      <todolist />
+      <footerTodo />
+    </div>
+
+   
   </div>
 </template>
 

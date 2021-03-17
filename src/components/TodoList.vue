@@ -39,10 +39,10 @@
                                 <div class="btn-item" >
                                     <input type="button" value="Delete" v-on:click="deleteItem()" class="btn-item--del"/> 
                                     <section v-if="strTitle.flagStatus == true">
-                                        <input type="button" v-on:click="changeStatus()" value="unDone" class="btn-item--done "/>
+                                        <input type="button" v-on:click="changeStatus()" value="unDone" class="btn-item--done unDone"/>
                                     </section>
                                     <section v-else>
-                                        <input type="button" v-on:click="changeStatus()" id="" value="Done" class="btn-item--done "/>
+                                        <input type="button" v-on:click="changeStatus()" id="" value="Done" class="btn-item--done done"/>
                                     </section>
                                 </div>
                             </div>
@@ -101,8 +101,10 @@ export default{
             .catch(function (error) {
                 console.log(error);
             });
-          }
+          }else{
             this.displayInput = "block"
+          }
+            
         },
     deleteItem(){
         var conf = confirm('Bạn chắc chắn muốn xóa item này?');

@@ -12,8 +12,6 @@ header {
 #app{
     display: flex;
     justify-content: center;
-    
-    
 }
     #app > div{
         width: 960px;
@@ -51,9 +49,6 @@ header {
             margin: 3rem 0;
             width: 960px;
         }
-            .container-fuild #Title {
-                text-align: center;
-            }
         .container{
             display: flex;
             flex-wrap: nowrap;
@@ -63,17 +58,16 @@ header {
                 width: 250px;
             }
             .container .content{
-                width: 700px;
+                width: 710px;
             }
             .container .content .input-txt{
-                display: flex;
-                justify-content: flex-start;
+                width: 100%;
             }
             .container .content .input-txt input{
                 height: 30px;
                 border: 1px solid lightgray;
                 outline: none;
-                width: 90%;
+                width: 91%;
                 font-size: 12pt;
             }
             .container .content .input-txt .btn-submit{
@@ -129,6 +123,7 @@ header {
                 display: flex;
                 flex-wrap: nowrap;
                 margin:1rem 0rem;
+                width: 98%;
             }
             .container .content .list-item .list-item--01 .item-content{
                 flex: 78%;
@@ -142,14 +137,14 @@ header {
         
             }
             .container .content .list-item .list-item--01 .btn-item{
-                flex:12%;
                 display: flex;
             }
             .container .content .list-item .list-item--01 .btn-item .btn-item--del{
-                background-color: red;
-                border: 1px solid red;
+                background-color: #FE2E2E;
+                border: 1px solid #FE2E2E;
                 outline: none;
                 flex: 50%;
+                font-size: 11pt;
             }
             .container .content .list-item .list-item--01 .btn-item--del:hover{
                 cursor: pointer;
@@ -161,12 +156,20 @@ header {
                 background-color: #00917c;
                 border: 1px solid #00917c;
                 outline: none;
+                font-size: 11pt;
+                flex: 50%;
+            }
+            .container .content .list-item .list-item--01 .btn-item .done{
+                background-color: #088A29;
+                border: 1px solid #088A29;
+                outline: none;
                 flex: 50%;
             }
             .container .content .list-item .list-item--01 .btn-item--done:hover{
                 cursor: pointer;
                 font-weight: bold;
                 outline: none;
+                color: white;
             }
 footer {
     width: 100%;
@@ -177,41 +180,60 @@ footer {
     text-align: center;
 }
 @media only screen and (max-width:960px){
+   
+    #app > div{
+        width: 100%;
+        border: none;
+    }
+    header{
+        width: 100%;
+    }
+    .container-fuild{
+        margin: 0 auto;
+        width: 100%;
+    }
     .container{
+        width: 100%;
         flex-direction: column-reverse;
+    }
+    .flex-menu {
+        display: flex;
+        width: 100%;
+    }
+    .flex-menu .menu-item{
+        flex: 25%;
+    }
+    .container .content{
+        margin: 10px 10px;
+        width: 98%;
+    }
+    .container .content form{
+        display: flex;
+        justify-content: flex-start;
+    }
+    .container .content .input-txt input{
+        flex: 93%;
+    }
+    .container .content .input-txt .btn-submit{
+        flex: 6%;
+    }
+    .container .content .list-item .list-item--01{
+        width: 99%;
+        box-shadow: 6px 3px #3e978b;
+        display: flex;
     }
     .container .nav {
         width: 100%;
+        margin: 0 0;
     }
     .container .nav .nav-box{
-        height: 200px;
-    }
-    .container .content .input-txt input{
-        width: 76%;
-    }
-    .container .content .input-txt .btn-submit{
-        width: 20%;
-    }
-    .container .content .list-item .list-item--01 {
-        display: flex;
+        width: 98%;
+        margin: 10px 10px;
     }
     .container .content .list-item .list-item--01 .btn-item{
         display: flex;
     }
     .container .content .list-item .list-item--01 .item-content{
-        width: 68%;
         flex: 50%;
-    }
-    .container .content .list-item .list-item--01 .btn-item--del{
-        background-color: red;
-        border: 1px solid red;
-        outline: none;
-        flex: 25%;
-    }
-    .container .content .list-item .list-item--01 .btn-item--done{
-        background-color: #00917c;
-        border: 1px solid #00917c;
-        outline: none;
-        flex: 25%;
     }
 }
